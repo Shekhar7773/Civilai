@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CivilCalc Pro | Construction Calculators & PDF Tools</title>
+    <meta name="description" content="Comprehensive collection of civil engineering calculators and PDF tools for construction professionals. Free online tools for concrete, steel, brickwork, and more.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #2b6cb0;
+            --primary-dark: #2c5282;
+            --secondary: #3182ce;
+            --accent: #4299e1;
+            --light: #f7fafc;
+            --dark: #1a202c;
+            --success: #48bb78;
+            --warning: #ed8936;
+            --danger: #e53e3e;
+            --gray: #718096;
+            --light-gray: #e2e8f0;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f8fafc;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(43, 108, 176, 0.9), rgba(49, 130, 206, 0.9)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+        
+        .btn-primary {
+            background-color: white;
+            color: var(--primary);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 4rem 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+        
+        /* Calculator Categories */
+        .calculator-categories {
+            padding: 4rem 0;
+            background-color: var(--light);
+        }
+        
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .category-tab {
+            padding: 0.8rem 1.5rem;
+            background-color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+            border: 1px solid var(--light-gray);
+        }
+        
+        .category-tab.active, .category-tab:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .tool-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .tool-image {
+            height: 160px;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--primary);
+        }
+        
+        .tool-content {
+            padding: 1.5rem;
+        }
+        
+        .tool-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .tool-content p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .tool-link {
+            display: inline-block;
+            color: var(--primary);
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .tool-link:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+        
+        .tool-link i {
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+        
+        .tool-link:hover i {
+            transform: translateX(3px);
+        }
+        
+        /* PDF Tools Section */
+        .pdf-tools {
+            padding: 4rem 0;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 4rem 0;
+            background-color: var(--light);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+        
+        .author-info h4 {
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+        
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Call to Action */
+        .cta-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-column a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .newsletter-form {
+            display: flex;
+            margin-top: 1.5rem;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+        
+        .newsletter-form button {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .newsletter-form button:hover {
+            background-color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 4rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 3rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+                width: 100%;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .feature-card {
+                padding: 1.5rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-content, .section-header, .feature-card, .tool-card, .testimonial-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .hero-content { animation-delay: 0.1s; }
+        .section-header { animation-delay: 0.2s; }
+        .feature-card:nth-child(1) { animation-delay: 0.3s; }
+        .feature-card:nth-child(2) { animation-delay: 0.4s; }
+        .feature-card:nth-child(3) { animation-delay: 0.5s; }
+        .tool-card { animation-delay: 0.3s; }
+        .testimonial-card { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <i class="fas fa-calculator"></i>
+                <span>CivilCalc Pro</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#calculators">Calculators</a></li>
+                    <li><a href="#pdf-tools">PDF Tools</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Your Complete Civil Engineering Toolkit</h1>
+            <p>Access 50+ specialized calculators and PDF tools designed for construction professionals, engineers, and contractors. Save time and increase accuracy on your projects.</p>
+            <div class="cta-buttons">
+                <a href="#calculators" class="btn btn-primary">
+                    <i class="fas fa-calculator"></i> Explore Calculators
+                </a>
+                <a href="#pdf-tools" class="btn btn-secondary">
+                    <i class="fas fa-file-pdf"></i> PDF Tools
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose CivilCalc Pro?</h2>
+                <p>Our tools are designed by engineers for professionals who demand accuracy and efficiency</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Instant Calculations</h3>
+                    <p>Get precise results in seconds with our optimized calculation engines. No more manual computations or spreadsheet errors.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Access all tools from any device, whether you're in the office or on the construction site. Works perfectly on smartphones.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Project Analytics</h3>
+                    <p>Track your calculations, save projects, and generate reports to streamline your workflow and documentation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="calculator-categories" id="calculators">
+        <div class="container">
+            <div class="section-header">
+                <h2>Construction Calculators</h2>
+                <p>Comprehensive collection of calculators for all your construction needs</p>
+            </div>
+            <div class="category-tabs">
+                <div class="category-tab active">All Categories</div>
+                <div class="category-tab">Concrete</div>
+                <div class="category-tab">Steel</div>
+                <div class="category-tab">Masonry</div>
+                <div class="category-tab">Surveying</div>
+                <div class="category-tab">Earthwork</div>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-image">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>Concrete Volume Calculator</h3>
+                        <p>Calculate exact concrete quantities for slabs, beams, columns, and footings with different mix designs.</p>
+                        <a href="#" class="tool-link">Open Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-image">
+                        <i class="fas fa-ruler-combined"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>Rebar Calculator</h3>
+                        <p>Determine rebar quantities, spacing, and cutting lengths for reinforced concrete elements.</p>
+                        <a href="#" class="tool-link">Open Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-image">
+                        <i class="fas fa-border-all"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>Brick & Block Calculator</h3>
+                        <p>Estimate brick, block, and mortar quantities for walls of different thicknesses and bond patterns.</p>
+                        <a href="#" class="tool-link">Open Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-image">
+                        <i class="fas fa-trowel"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>Plaster Calculator</h3>
+                        <p>Calculate cement and sand quantities for plastering work with different mix ratios and thicknesses.</p>
+                        <a href="#" class="tool-link">Open Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-image">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>Earthwork Calculator</h3>
+                        <p>Compute cut and fill volumes for excavation and embankment projects with cross-section data.</p>
+                        <a href="#" class="tool-link">Open Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-image">
+                        <i class="fas fa-road"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>Slope Calculator</h3>
+                        <p>Determine slope percentages, angles, and elevations for grading and drainage projects.</p>
+                        <a href="#" class="tool-link">Open Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-image">
+                        <i class="fas fa-weight-hanging"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>Unit Converter</h3>
+                        <p>Convert between different units of length, area, volume, weight, and pressure with ease.</p>
+                        <a href="#" class="tool-link">Open Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-image">
+                        <i class="fas fa-eye-dropper"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>Water Cement Ratio</h3>
+                        <p>Calculate the optimal water-cement ratio for concrete mixes based on strength requirements.</p>
+                        <a href="#" class="tool-link">Open Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pdf-tools" id="pdf-tools">
+        <div class="container">
+            <div class="section-header">
+                <h2>PDF Tools for Construction</h2>
+                <p>Specialized tools to create, edit, and analyze construction documents in PDF format</p>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-image">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>BOQ Generator</h3>
+                        <p>Create professional Bills of Quantities in PDF format from your calculation data.</p>
+                        <a href="#" class="tool-link">Open Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-image">
+                        <i class="fas fa-ruler-combined"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>PDF Measurement Tool</h3>
+                        <p>Take precise measurements from construction drawings in PDF format with scale calibration.</p>
+                        <a href="#" class="tool-link">Open Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-image">
+                        <i class="fas fa-file-signature"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>Construction Report Generator</h3>
+                        <p>Generate professional PDF reports with your calculation results, ready for client submission.</p>
+                        <a href="#" class="tool-link">Open Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-image">
+                        <i class="fas fa-file-export"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h3>PDF to CAD Converter</h3>
+                        <p>Convert PDF construction drawings to DXF format for editing in CAD software.</p>
+                        <a href="#" class="tool-link">Open Tool <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Trusted by Construction Professionals</h2>
+                <p>What our users say about CivilCalc Pro tools</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The concrete calculator has saved me hours of manual calculations. The ability to save projects and generate PDF reports has streamlined my workflow tremendously."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RK</div>
+                        <div class="author-info">
+                            <h4>Rajesh Kumar</h4>
+                            <p>Structural Engineer, Delhi</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"As a contractor, I use the brick calculator and plaster calculator daily. The mobile-friendly design means I can make calculations right on the job site."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <h4>Sunil Mehta</h4>
+                            <p>Construction Contractor, Mumbai</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The PDF measurement tool has been invaluable for verifying dimensions from architectural drawings. It's accurate and easy to use."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AP</div>
+                        <div class="author-info">
+                            <h4>Anjali Patel</h4>
+                            <p>Project Manager, Bangalore</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Your Construction Calculations?</h2>
+            <p>Join thousands of engineers, contractors, and construction professionals who save time and reduce errors with CivilCalc Pro</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i> Get Started Now
+                </a>
+                <a href="#" class="btn btn-secondary">
+                    <i class="fas fa-book"></i> View Documentation
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CivilCalc Pro</h3>
+                    <p>Your complete civil engineering toolkit with 50+ calculators and PDF tools for construction professionals.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#calculators">Calculators</a></li>
+                        <li><a href="#pdf-tools">PDF Tools</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Calculator Categories</h3>
+                    <ul>
+                        <li><a href="#">Concrete Calculators</a></li>
+                        <li><a href="#">Steel Calculators</a></li>
+                        <li><a href="#">Masonry Calculators</a></li>
+                        <li><a href="#">Surveying Tools</a></li>
+                        <li><a href="#">Earthwork Calculators</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get updates on new tools and features.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 CivilCalc Pro. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('show');
+        });
+        
+        // Category tabs functionality
+        const tabs = document.querySelectorAll('.category-tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                tabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                // Here you would filter tools by category
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Initialize animations
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.feature-card, .tool-card, .testimonial-card');
+            elements.forEach(el => {
+                const elTop = el.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elTop < windowHeight - 100) {
+                    el.style.animation = 'fadeInUp 0.6s ease forwards';
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
