@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CivilBai - Smart Construction Calculators | Concrete, Plaster, Brick</title>
+    <meta name="description" content="Professional construction calculators for concrete, plaster, and brick work. Calculate material quantities, costs and optimize construction images.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
+    
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f7fa;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .logo i {
+            font-size: 1.8rem;
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .cta-btn:hover {
+            background-color: #3a7bd5;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+        
+        /* Calculator Grid */
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        /* Calculator Card */
+        .calculator-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .calculator-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .calculator-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.2rem;
+            text-align: center;
+        }
+        
+        .calculator-header h2 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .calculator-header i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+        
+        .calculator-body {
+            padding: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--light);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
+            transform: translateY(-2px);
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        /* Results Section */
+        .results {
+            margin-top: 1.5rem;
+            padding: 1.2rem;
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .results h3 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dashed var(--light-gray);
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .result-label {
+            font-weight: 500;
+            color: var(--gray);
+        }
+        
+        .result-value {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        /* Image Optimizer Section */
+        .image-optimizer {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            margin: 3rem 0;
+        }
+        
+        .optimizer-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.2rem;
+            text-align: center;
+        }
+        
+        .optimizer-header h2 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .optimizer-header i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+        
+        .optimizer-body {
+            padding: 1.5rem;
+        }
+        
+        .file-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            border: 2px dashed var(--light-gray);
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .file-upload:hover {
+            border-color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.05);
+        }
+        
+        .file-upload i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .file-upload p {
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+        
+        .file-upload input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .compression-controls {
+            margin-bottom: 1.5rem;
+        }
+        
+        .compression-controls label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .range-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .range-slider {
+            flex: 1;
+            -webkit-appearance: none;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--light-gray);
+            outline: none;
+        }
+        
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .range-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            background: var(--primary-dark);
+        }
+        
+        .compression-value {
+            font-weight: 600;
+            color: var(--primary);
+            min-width: 40px;
+            text-align: center;
+        }
+        
+        .image-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .image-container {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .image-container h3 {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .image-info {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-align: center;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--success), #4895ef);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-top: 1.5rem;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+        
+        .download-btn:hover {
+            background: linear-gradient(135deg, #3bc9db, #3a7bd5);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(76, 201, 240, 0.4);
+        }
+        
+        /* Ad Containers */
+        .ad-container {
+            margin: 2rem 0;
+            background-color: white;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .ad-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-column a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .hero {
+                padding: 3rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .image-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 2rem 0;
+                border-radius: 0;
+            }
+            
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+            
+            .cta-btn, .btn, .download-btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .calculator-header h2, .optimizer-header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .calculator-body, .optimizer-body {
+                padding: 1rem;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .calculator-card, .image-optimizer {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .calculator-card:nth-child(1) { animation-delay: 0.1s; }
+        .calculator-card:nth-child(2) { animation-delay: 0.2s; }
+        .calculator-card:nth-child(3) { animation-delay: 0.3s; }
+        .image-optimizer { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-calculator"></i>
+                <span>CivilBai</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#concrete-calculator"><i class="fas fa-cubes"></i> Concrete</a></li>
+                    <li><a href="#plaster-calculator"><i class="fas fa-trowel"></i> Plaster</a></li>
+                    <li><a href="#brick-calculator"><i class="fas fa-border-all"></i> Brick</a></li>
+                    <li><a href="#image-optimizer"><i class="fas fa-image"></i> Optimizer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Smart Construction Calculators</h1>
+            <p>Accurate material calculations for concrete, plaster, brick work and image optimization for your construction projects</p>
+            <a href="#concrete-calculator" class="cta-btn">Get Started</a>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Ad Banner Top -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <!-- Calculator Grid -->
+        <div class="calculator-grid">
+            <!-- Concrete Calculator -->
+            <div id="concrete-calculator" class="calculator-card">
+                <div class="calculator-header">
+                    <i class="fas fa-cubes"></i>
+                    <h2>Concrete Calculator</h2>
+                </div>
+                <div class="calculator-body">
+                    <form id="concrete-form">
+                        <div class="form-group">
+                            <label for="concrete-length"><i class="fas fa-ruler-horizontal"></i> Length (m)</label>
+                            <input type="number" id="concrete-length" class="form-control" step="0.01" placeholder="e.g. 5.5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="concrete-width"><i class="fas fa-ruler-vertical"></i> Width (m)</label>
+                            <input type="number" id="concrete-width" class="form-control" step="0.01" placeholder="e.g. 3.2" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="concrete-depth"><i class="fas fa-ruler"></i> Depth (m)</label>
+                            <input type="number" id="concrete-depth" class="form-control" step="0.01" placeholder="e.g. 0.15" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="concrete-grade"><i class="fas fa-layer-group"></i> Concrete Grade</label>
+                            <select id="concrete-grade" class="form-control">
+                                <option value="M10">M10</option>
+                                <option value="M15">M15</option>
+                                <option value="M20" selected>M20</option>
+                                <option value="M25">M25</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn"><i class="fas fa-calculator"></i> Calculate</button>
+                    </form>
+                    <div id="concrete-results" class="results" style="display: none;">
+                        <h3><i class="fas fa-clipboard-list"></i> Calculation Results</h3>
+                        <div class="result-item">
+                            <span class="result-label">Volume:</span>
+                            <span class="result-value" id="result-volume">0 m³</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Cement:</span>
+                            <span class="result-value" id="result-cement">0 bags</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Sand:</span>
+                            <span class="result-value" id="result-sand">0 m³</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Aggregate:</span>
+                            <span class="result-value" id="result-aggregate">0 m³</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Approx. Cost:</span>
+                            <span class="result-value" id="result-cost">₹0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plaster Calculator -->
+            <div id="plaster-calculator" class="calculator-card">
+                <div class="calculator-header">
+                    <i class="fas fa-trowel"></i>
+                    <h2>Plaster Calculator</h2>
+                </div>
+                <div class="calculator-body">
+                    <form id="plaster-form">
+                        <div class="form-group">
+                            <label for="plaster-length"><i class="fas fa-ruler-horizontal"></i> Length (m)</label>
+                            <input type="number" id="plaster-length" class="form-control" step="0.01" placeholder="e.g. 10" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="plaster-height"><i class="fas fa-ruler-vertical"></i> Height (m)</label>
+                            <input type="number" id="plaster-height" class="form-control" step="0.01" placeholder="e.g. 2.5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="plaster-thickness"><i class="fas fa-ruler"></i> Thickness (mm)</label>
+                            <input type="number" id="plaster-thickness" class="form-control" step="1" value="12" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="plaster-ratio"><i class="fas fa-balance-scale-right"></i> Cement:Sand Ratio</label>
+                            <select id="plaster-ratio" class="form-control">
+                                <option value="1:3">1:3</option>
+                                <option value="1:4" selected>1:4</option>
+                                <option value="1:5">1:5</option>
+                                <option value="1:6">1:6</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn"><i class="fas fa-calculator"></i> Calculate</button>
+                    </form>
+                    <div id="plaster-results" class="results" style="display: none;">
+                        <h3><i class="fas fa-clipboard-list"></i> Calculation Results</h3>
+                        <div class="result-item">
+                            <span class="result-label">Area:</span>
+                            <span class="result-value" id="result-plaster-area">0 m²</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Cement:</span>
+                            <span class="result-value" id="result-plaster-cement">0 bags</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Sand:</span>
+                            <span class="result-value" id="result-plaster-sand">0 m³</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Approx. Cost:</span>
+                            <span class="result-value" id="result-plaster-cost">₹0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Brick Calculator -->
+            <div id="brick-calculator" class="calculator-card">
+                <div class="calculator-header">
+                    <i class="fas fa-border-all"></i>
+                    <h2>Brick Calculator</h2>
+                </div>
+                <div class="calculator-body">
+                    <form id="brick-form">
+                        <div class="form-group">
+                            <label for="brick-length"><i class="fas fa-ruler-horizontal"></i> Wall Length (m)</label>
+                            <input type="number" id="brick-length" class="form-control" step="0.01" placeholder="e.g. 8" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="brick-height"><i class="fas fa-ruler-vertical"></i> Wall Height (m)</label>
+                            <input type="number" id="brick-height" class="form-control" step="0.01" placeholder="e.g. 3" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="brick-thickness"><i class="fas fa-ruler"></i> Wall Thickness</label>
+                            <select id="brick-thickness" class="form-control">
+                                <option value="0.115">4.5" (115mm)</option>
+                                <option value="0.230" selected>9" (230mm)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="brick-size"><i class="fas fa-vector-square"></i> Brick Size</label>
+                            <select id="brick-size" class="form-control">
+                                <option value="0.19x0.09x0.09">Standard (19x9x9 cm)</option>
+                                <option value="0.23x0.11x0.07">Large (23x11x7 cm)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn"><i class="fas fa-calculator"></i> Calculate</button>
+                    </form>
+                    <div id="brick-results" class="results" style="display: none;">
+                        <h3><i class="fas fa-clipboard-list"></i> Calculation Results</h3>
+                        <div class="result-item">
+                            <span class="result-label">Volume:</span>
+                            <span class="result-value" id="result-brick-volume">0 m³</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Bricks:</span>
+                            <span class="result-value" id="result-brick-count">0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Cement:</span>
+                            <span class="result-value" id="result-brick-cement">0 bags</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Sand:</span>
+                            <span class="result-value" id="result-brick-sand">0 m³</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Approx. Cost:</span>
+                            <span class="result-value" id="result-brick-cost">₹0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- In-Article Ad -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <!-- Image Optimization Tool -->
+        <div id="image-optimizer" class="image-optimizer">
+            <div class="optimizer-header">
+                <i class="fas fa-image"></i>
+                <h2>Construction Image Optimizer</h2>
+            </div>
+            <div class="optimizer-body">
+                <div class="file-upload">
+                    <input type="file" id="image-upload" accept="image/*">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag & drop your image here or click to browse</p>
+                    <small>Supports JPG, PNG (Max 5MB)</small>
+                </div>
+                
+                <div class="compression-controls">
+                    <label for="compression-level"><i class="fas fa-compress-alt"></i> Compression Level</label>
+                    <div class="range-container">
+                        <input type="range" id="compression-level" class="range-slider" min="0" max="100" value="70">
+                        <span id="compression-value" class="compression-value">70%</span>
+                    </div>
+                </div>
+                
+                <button id="optimize-btn" class="btn"><i class="fas fa-magic"></i> Optimize Image</button>
+                
+                <div class="image-comparison">
+                    <div class="image-container">
+                        <h3>Original</h3>
+                        <img id="original-img" src="" alt="Original Image">
+                        <p id="original-size" class="image-info">Size: 0 KB</p>
+                    </div>
+                    <div class="image-container">
+                        <h3>Optimized</h3>
+                        <img id="optimized-img" src="" alt="Optimized Image">
+                        <p id="optimized-size" class="image-info">Size: 0 KB (0% reduction)</p>
+                    </div>
+                </div>
+                
+                <a id="download-btn" class="download-btn" download="optimized-image.jpg" style="display: none;">
+                    <i class="fas fa-download"></i> Download Optimized Image
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CivilBai</h3>
+                    <p>Smart construction calculators for professionals and homeowners. Accurate material calculations for your building projects.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Calculators</h3>
+                    <ul>
+                        <li><a href="#concrete-calculator">Concrete Calculator</a></li>
+                        <li><a href="#plaster-calculator">Plaster Calculator</a></li>
+                        <li><a href="#brick-calculator">Brick Calculator</a></li>
+                        <li><a href="#image-optimizer">Image Optimizer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Construction Guides</a></li>
+                        <li><a href="#">Material Prices</a></li>
+                        <li><a href="#">Building Codes</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 CivilBai.in. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Concrete Calculator Functionality
+        document.getElementById('concrete-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get input values
+            const length = parseFloat(document.getElementById('concrete-length').value);
+            const width = parseFloat(document.getElementById('concrete-width').value);
+            const depth = parseFloat(document.getElementById('concrete-depth').value);
+            const grade = document.getElementById('concrete-grade').value;
+            
+            // Calculate volume
+            const volume = length * width * depth;
+            
+            // Calculate materials based on grade (simplified)
+            let cement, sand, aggregate;
+            switch(grade) {
+                case 'M10':
+                    cement = volume * 4.5;
+                    sand = volume * 0.5;
+                    aggregate = volume * 0.8;
+                    break;
+                case 'M15':
+                    cement = volume * 6;
+                    sand = volume * 0.5;
+                    aggregate = volume * 0.8;
+                    break;
+                case 'M20':
+                    cement = volume * 7.5;
+                    sand = volume * 0.5;
+                    aggregate = volume * 0.8;
+                    break;
+                case 'M25':
+                    cement = volume * 9;
+                    sand = volume * 0.5;
+                    aggregate = volume * 0.8;
+                    break;
+            }
+            
+            // Calculate approximate cost (sample rates)
+            const cost = cement * 400 + sand * 1500 + aggregate * 1200;
+            
+            // Display results
+            document.getElementById('result-volume').textContent = volume.toFixed(2) + ' m³';
+            document.getElementById('result-cement').textContent = cement.toFixed(2) + ' bags (50kg each)';
+            document.getElementById('result-sand').textContent = sand.toFixed(2) + ' m³';
+            document.getElementById('result-aggregate').textContent = aggregate.toFixed(2) + ' m³';
+            document.getElementById('result-cost').textContent = '₹' + cost.toFixed(2);
+            
+            // Show results section
+            document.getElementById('concrete-results').style.display = 'block';
+        });
+
+        // Plaster Calculator Functionality
+        document.getElementById('plaster-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const length = parseFloat(document.getElementById('plaster-length').value);
+            const height = parseFloat(document.getElementById('plaster-height').value);
+            const thickness = parseFloat(document.getElementById('plaster-thickness').value) / 1000; // convert to meters
+            const ratio = document.getElementById('plaster-ratio').value;
+            
+            const area = length * height;
+            const volume = area * thickness;
+            
+            const ratioParts = ratio.split(':');
+            const cementPart = parseFloat(ratioParts[0]);
+            const sandPart = parseFloat(ratioParts[1]);
+            
+            const cement = (volume * 1.54 * 1440) / (cementPart + sandPart) / 50;
+            const sand = (volume * 1.54 * sandPart) / (cementPart + sandPart);
+            
+            // Calculate approximate cost (sample rates)
+            const cost = cement * 400 + sand * 1500;
+            
+            // Display results
+            document.getElementById('result-plaster-area').textContent = area.toFixed(2) + ' m²';
+            document.getElementById('result-plaster-cement').textContent = cement.toFixed(2) + ' bags (50kg each)';
+            document.getElementById('result-plaster-sand').textContent = sand.toFixed(2) + ' m³';
+            document.getElementById('result-plaster-cost').textContent = '₹' + cost.toFixed(2);
+            
+            // Show results section
+            document.getElementById('plaster-results').style.display = 'block';
+        });
+
+        // Brick Calculator Functionality
+        document.getElementById('brick-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const length = parseFloat(document.getElementById('brick-length').value);
+            const height = parseFloat(document.getElementById('brick-height').value);
+            const thickness = parseFloat(document.getElementById('brick-thickness').value);
+            const brickSize = document.getElementById('brick-size').value;
+            
+            const [brickLength, brickWidth, brickHeight] = brickSize.split('x').map(parseFloat);
+            
+            // Calculate number of bricks
+            const volume = length * height * thickness;
+            const brickVolume = (brickLength/100) * (brickWidth/100) * (brickHeight/100);
+            const bricksNeeded = Math.ceil(volume / brickVolume * 1.05); // 5% wastage
+            
+            // Calculate mortar (1:6 ratio)
+            const mortarVolume = volume * 0.3; // Approximate
+            const cement = (mortarVolume * 1.54 * 1440) / 7 / 50;
+            const sand = (mortarVolume * 1.54 * 6) / 7;
+            
+            // Calculate approximate cost (sample rates)
+            const cost = bricksNeeded * 10 + cement * 400 + sand * 1500;
+            
+            // Display results
+            document.getElementById('result-brick-volume').textContent = volume.toFixed(2) + ' m³';
+            document.getElementById('result-brick-count').textContent = bricksNeeded;
+            document.getElementById('result-brick-cement').textContent = cement.toFixed(2) + ' bags (50kg each)';
+            document.getElementById('result-brick-sand').textContent = sand.toFixed(2) + ' m³';
+            document.getElementById('result-brick-cost').textContent = '₹' + cost.toFixed(2);
+            
+            // Show results section
+            document.getElementById('brick-results').style.display = 'block';
+        });
+
+        // Image Optimization Functionality
+        document.getElementById('compression-level').addEventListener('input', function() {
+            document.getElementById('compression-value').textContent = this.value + '%';
+        });
+
+        document.getElementById('image-upload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            // Check file size (max 5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('Please select an image smaller than 5MB');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = document.getElementById('original-img');
+                img.src = event.target.result;
+                document.getElementById('original-size').textContent = `Size: ${(file.size / 1024).toFixed(2)} KB`;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        document.getElementById('optimize-btn').addEventListener('click', function() {
+            const originalImg = document.getElementById('original-img');
+            if (!originalImg.src) {
+                alert('Please upload an image first');
+                return;
+            }
+            
+            const compressionLevel = parseInt(document.getElementById('compression-level').value) / 100;
+            const quality = 1 - compressionLevel;
+            
+            // Create canvas for optimization
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            
+            img.onload = function() {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0);
+                
+                // Convert to optimized format
+                const optimizedDataUrl = canvas.toDataURL('image/jpeg', quality);
+                const optimizedImg = document.getElementById('optimized-img');
+                optimizedImg.src = optimizedDataUrl;
+                
+                // Calculate size
+                const optimizedSize = Math.round((optimizedDataUrl.length * 3) / 4) / 1024;
+                const originalSize = parseFloat(document.getElementById('original-size').textContent.split(' ')[1]);
+                const reduction = ((originalSize - optimizedSize) / originalSize * 100).toFixed(0);
+                
+                document.getElementById('optimized-size').textContent = `Size: ${optimizedSize.toFixed(2)} KB (${reduction}% reduction)`;
+                
+                // Set download link
+                const downloadBtn = document.getElementById('download-btn');
+                downloadBtn.href = optimizedDataUrl;
+                downloadBtn.style.display = 'inline-block';
+            };
+            
+            img.src = originalImg.src;
+        });
+
+        // Initialize AdSense ads
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
